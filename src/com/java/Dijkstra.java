@@ -4,25 +4,25 @@ package com.java;
  *Dijkstra，最短路径算法
  */
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Dijkstra {
-    public  final int M = -1;
-     int n;
-     int[][] map;
-     int[] shortest;
-     int[] shorpath;
-     boolean[] visited;
+    public final int M = -1;
+    int n;
+    int[][] map;
+    int[] shortest;
+
+    boolean[] visited;
+
+
+
 
     public Dijkstra(int[][] map) {
 
         this.map = map;
         n = map.length;       //顶点的个数
         shortest = new int[n];  //存放从start到其他节点的最短路径
-      //存放从start到其他节点的最短路径
+        //存放从start到其他节点的最短路径
         visited = new boolean[n]; //标记当前该顶点的最短路径是否已经求出，true表示已经求出
 
     }
@@ -51,12 +51,12 @@ public class Dijkstra {
 
     }*/
 
-    int[] dijkstra_alg(int orig,int end) {
+    int[] dijkstra_alg(int orig, int end) {
+        int[] shorpath;
         // TODO Auto-generated method stub
         // 初始化，第一个顶点求出
         shortest[orig] = 0;
         visited[orig] = true;
-
 
 
         //存放从start到其他各节点的最短路径
@@ -65,13 +65,12 @@ public class Dijkstra {
             path[i] = new String(orig + "--->" + i);
 
 
-
         }
         for (int count = 0; count != n - 1; count++) {
             //选出一个距离初始顶点最近的为标记顶点
             int k = M;
             int min = M;
-        //每次都选与原点最近的点
+            //每次都选与原点最近的点
             for (int i = 0; i < n; i++)//遍历每一个顶点
             {
 //                可达的但是都被访问过,没被访问过的，全部都不可达
@@ -84,7 +83,6 @@ public class Dijkstra {
                     }
                 }
             }
-
 
 
             //正确的图生成的矩阵不可能出现K== M的情况,但是在公路的情况下 这种情况是存在的 因为并不是连通的啊
@@ -108,17 +106,13 @@ public class Dijkstra {
         }
 
 
-         String arr[] = path[end].split("--->");
+        String arr[] = path[end].split("--->");
         shorpath = new int[arr.length];
-        for(int i=0;i<arr.length;i++)
-             shorpath[i]=Integer.parseInt(arr[i]);
+        for (int i = 0; i < arr.length; i++)
+            shorpath[i] = Integer.parseInt(arr[i]);
         System.out.println(Arrays.toString(shorpath));
-
         System.out.println("=====================================");
 
-//        return shorpath;
-
-
-         return  shorpath;
+        return shorpath;
     }
 }

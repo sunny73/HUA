@@ -17,7 +17,6 @@ import java.util.List;
  **/
 
 public class Scheduling {
-
     class Cross {
         int id = -1;
         int leftRoad = -1;
@@ -26,7 +25,6 @@ public class Scheduling {
         int downRoad = -1;
 
     }
-
     class Road {
         int id = -1;
         int length = -1;
@@ -36,7 +34,6 @@ public class Scheduling {
         int to = -1;
         int isDuplex = -1;
     }
-
     class Car {
         int id = -1;
         int from = -1;
@@ -45,9 +42,7 @@ public class Scheduling {
         int planTime = -1;
         int shortestpath[];
     }
-
     Dijkstra dijkstra;
-
     public List<Cross> cross = new ArrayList<>(); //存放所有的cross
     public List<Road> road = new ArrayList<>(); //存放所有的road
     public List<Car> car = new ArrayList<>(); //存放所有的car
@@ -93,30 +88,24 @@ public class Scheduling {
         }
 
     }
-
     public void Findpath() {
         int path[][];
         readCar("C:\\sd\\Project\\java_pro\\HUA\\src\\data\\car.txt");
-        dijkstra = new Dijkstra(Graph);
-
 
         int ii, jj;
-        for (Car c : car) {
 
+        for (Car c : car) {
+            dijkstra = new Dijkstra(Graph);
             ii = mapping.indexOf(c.from);
             jj = mapping.indexOf(c.to);
-            c.shortestpath = dijkstra.dijkstra_alg(ii,jj); //这样返回的值 会不会出问题呢？
-
+            c.shortestpath = dijkstra.dijkstra_alg(ii,jj); //这样返回的值 会不会出问题呢？ 实践表明，返回的时候，创建了一个新的对象，没有问题
             //做一个转换
             for (int i = 0; i < c.shortestpath.length; i++) {
                 c.shortestpath[i] = mapping.indexOf(c.shortestpath[i]);
             }
-
         }
-
     }
-
-    public void ont(String name) {
+    public void out(String name) {
 
         try {
             FileWriter writer = new FileWriter(name);
@@ -132,20 +121,6 @@ public class Scheduling {
         }
 
     }
-
-    public Cross getGross(int id) {
-        Cross a = new Cross();
-        for (int i = 0; i < cross.size(); i++) {
-
-            if (cross.get(i).id == id) {
-                return cross.get(i);
-            }
-
-        }
-        return a;
-
-    }
-
     public void readcross(String name) {
         ArrayList<String> arrayList = new ArrayList<>();
         int[] array;
@@ -188,7 +163,6 @@ public class Scheduling {
 
 
     }
-
     public void readCar(String name) {
         ArrayList<String> arrayList = new ArrayList<>();
         int[] array;
@@ -232,7 +206,6 @@ public class Scheduling {
 
 
     }
-
     public void readRoads(String name) {
         ArrayList<String> arrayList = new ArrayList<>();
         int[] array;
@@ -278,13 +251,12 @@ public class Scheduling {
 
 
     }
-
     public static void main(String args[]) {
         String Outname = "C:\\sd\\Project\\java_pro\\HUA\\src\\data\\answer.txt";
         Scheduling a = new Scheduling();
         a.BuildGraph();
         a.Findpath();
-        a.ont(Outname);
+        a.out(Outname);
 
     }
 
